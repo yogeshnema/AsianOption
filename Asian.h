@@ -7,7 +7,7 @@
 
 class AsianOption {
 protected:
-	std::unique_ptr<PayOff> payoff; // payoff function
+	std::unique_ptr<PayOff> pay_off; // payoff function
 public:
 
 	explicit AsianOption(std::unique_ptr<PayOff> _payoff) noexcept;

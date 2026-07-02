@@ -1,13 +1,16 @@
 #include "payoff.h"
+#include <algorithm>
 
-PayOffCall::PayOffCall(double E) noexcept {
-	strike = E;
+PayOffCall::PayOffCall(double _E) noexcept : E(_E) {};
+
+
+double PayOffCall::operator()(const double& S) const noexcept{
+	return std::max(S - E, 0.0);
 }
 
-double PayOffCall::computeFixed(double mean) const noexcept {
-	return std::max(mean - strike, 0.0);
-}
+PayOffPut::PayOffPut(double _E) noexcept : E(_E) {};
 
-double PayOffCall::computeFloat(double mean, double spot) const noexcept {
-	return std::max(spot - strike, 0.0);
+
+double PayOffPut::operator()(const double& S) const noexcept {
+	return std::max(E - S, 0.0);
 }

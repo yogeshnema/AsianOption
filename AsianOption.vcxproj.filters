@@ -18,5 +18,22 @@
     <ClCompile Include="AsianOption.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Asian.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="payoff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Asian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="path_generation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="payoff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

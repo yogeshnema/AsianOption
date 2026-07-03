@@ -1,20 +1,36 @@
 // AsianOption.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
+#include <print>
+#include <vector>
+#include <memory>
+#include <cmath>
+
+#include "Asian.h"
+#include "payoff.h"
+#include "path_generation.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	const unsigned num_sims = 100000;
+	const unsigned num_intervals = 250;
+
+	const double S = 30;
+	const double K = 29;
+	const double r = 0.04;
+	const double v = 0.3;
+	const double T = 1.0;
+
+	std::vector<double> spot_prices(num_intervals , S);
+
+	auto payoffCall = std::make_unique<PayOffCall>(K);
+	AsianOptionArithmetic asianOption(std::move(payoffCall));
+
+	double payoff_sum = 0.0;
+	for(unsigned i=0; i<num_sims; ++i) {
+		calc_path_spot_prices(spot_prices, r, v, T);
+		payoff_sum += asianOption.pay_off_price(spot_prices);
+	}
+
+	double discounted_payoff_avg = std::exp(-r * T) * (payoff_sum / static_cast<double>(num_sims));
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

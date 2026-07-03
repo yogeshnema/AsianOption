@@ -33,4 +33,8 @@ int main()
 	}
 
 	double discounted_payoff_avg = std::exp(-r * T) * (payoff_sum / static_cast<double>(num_sims));
+
+	std::println("Asian Option Price: {:.6f}", discounted_payoff_avg);
+
+	return 0;	
 }
